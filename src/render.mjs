@@ -1,3 +1,9 @@
+// ---- base path support -----------------------------------------------
+let BASE = '';
+export function setBase(b){ BASE = b || ''; }
+const u = p => BASE + p;
+// ----------------------------------------------------------------------
+
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
   ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
@@ -53,13 +59,13 @@ export function baseArt(slug){
 
 export function layout({ seo, settings, categories, body, navActive = '' }){
   const navLinks = [
-    ['/war-bases/','War'], ['/cwl-bases/','CWL'], ['/farming-bases/','Farming'],
-    ['/trophy-bases/','Trophy'], ['/anti-3-star-bases/','Anti-3-Star'],
-    ['/latest/','Latest'], ['/submit-base/','Submit Base']
+    [u('/war-bases/'),'War'], [u('/cwl-bases/'),'CWL'], [u('/farming-bases/'),'Farming'],
+    [u('/trophy-bases/'),'Trophy'], [u('/anti-3-star-bases/'),'Anti-3-Star'],
+    [u('/latest/'),'Latest'], [u('/submit-base/'),'Submit Base']
   ];
   const nav = navLinks.map(([h,l]) =>
     `<a href="${h}"${navActive === h ? ' class="active"' : ''}>${l}</a>`).join('');
-  const footCats = categories.map(c => `<li><a href="/${c.slug}/">${esc(c.short)} Bases</a></li>`).join('');
+  const footCats = categories.map(c => `<li><a href="${u('/' + c.slug + '/')}">${esc(c.short)} Bases</a></li>`).join('');
   const jsonLd = seo.jsonLd ? `<script type="application/ld+json">${JSON.stringify(seo.jsonLd)}</script>` : '';
   const gsc = settings.googleSiteVerification ? `<meta name="google-site-verification" content="${esc(settings.googleSiteVerification)}">` : '';
   const analytics = settings.analyticsId ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(settings.analyticsId)}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${esc(settings.analyticsId)}');</script>` : '';
@@ -85,8 +91,9 @@ export function layout({ seo, settings, categories, body, navActive = '' }){
 <meta name="twitter:title" content="${esc(seo.title)}">
 <meta name="twitter:description" content="${esc(seo.description)}">
 <meta name="twitter:image" content="${esc(seo.image || settings.domain + settings.ogImage)}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="${u('/favicon.svg')}" type="image/svg+xml">
+<link rel="stylesheet" href="${u('/styles.css')}">
+<script>window.__BASE__=${JSON.stringify(BASE)};</script>
 ${gsc}${analytics}${adsense}
 ${jsonLd}
 </head>
@@ -94,7 +101,7 @@ ${jsonLd}
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
   <div class="hwrap">
-    <a class="logo" href="/">${logo}<span class="logo-txt"><strong>${esc(settings.siteName)}</strong><span>TH18 Base Library</span></span></a>
+    <a class="logo" href="${u('/')}">${logo}<span class="logo-txt"><strong>${esc(settings.siteName)}</strong><span>TH18 Base Library</span></span></a>
     <nav class="main" aria-label="Primary">${nav}</nav>
     <div class="hbtns">
       <button class="icon-btn" id="searchBtn" aria-label="Search bases"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
@@ -106,12 +113,12 @@ ${jsonLd}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="logo" href="/" style="margin-bottom:14px">${logo}<span class="logo-txt"><strong>${esc(settings.siteName)}</strong><span>TH18 Base Library</span></span></a>
+        <a class="logo" href="${u('/')}" style="margin-bottom:14px">${logo}<span class="logo-txt"><strong>${esc(settings.siteName)}</strong><span>TH18 Base Library</span></span></a>
         <p style="color:var(--muted);font-size:13.5px;max-width:38ch;margin:0">${esc(settings.siteDescription)}</p>
       </div>
       <div><h4>Categories</h4><ul>${footCats}</ul></div>
-      <div><h4>Browse</h4><ul><li><a href="/latest/">Latest TH18 Bases</a></li><li><a href="/popular/">Most Viewed</a></li><li><a href="/submit-base/">Submit a Base</a></li></ul></div>
-      <div><h4>Site</h4><ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy-policy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul></div>
+      <div><h4>Browse</h4><ul><li><a href="${u('/latest/')}">Latest TH18 Bases</a></li><li><a href="${u('/popular/')}">Most Viewed</a></li><li><a href="${u('/submit-base/')}">Submit a Base</a></li></ul></div>
+      <div><h4>Site</h4><ul><li><a href="${u('/about/')}">About</a></li><li><a href="${u('/contact/')}">Contact</a></li><li><a href="${u('/privacy-policy/')}">Privacy Policy</a></li><li><a href="${u('/terms/')}">Terms</a></li><li><a href="${u('/disclaimer/')}">Disclaimer</a></li></ul></div>
     </div>
     <div class="foot-bottom"><span>© ${new Date().getFullYear()} ${esc(settings.siteName)}.</span><span>TH18 layouts only · Independent fan resource</span></div>
     <p class="disclaimer">${esc(settings.siteName)} is an independent, fan-made community resource. Not affiliated with, endorsed by, sponsored by, or officially connected to Supercell Oy. Clash of Clans is a trademark of Supercell Oy.</p>
@@ -124,7 +131,7 @@ ${jsonLd}
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="/app.js" defer></script>
+<script src="${u('/app.js')}" defer></script>
 </body>
 </html>`;
 }
@@ -140,7 +147,8 @@ export function crumbs(items){
 
 export function baseCard(b, cats){
   const cat = cats.find(c => c.key === b.category);
-  const img = b.image || `/images/bases/${b.slug}.svg`;
+  const img = b.image ? u(b.image) : u(`/images/bases/${b.slug}.svg`);
+  const href = u(`/${b.slug}/`);
   return `<article class="card">
     <div class="card-thumb">
       <img src="${esc(img)}" alt="${esc(b.name)} layout" width="600" height="600" loading="lazy" decoding="async">
@@ -148,14 +156,14 @@ export function baseCard(b, cats){
       ${b.featured ? '<span class="badge alt">★ Featured</span>' : ''}
     </div>
     <div class="card-body">
-      <h3 class="card-title"><a href="/${b.slug}/">${esc(b.name)}</a></h3>
+      <h3 class="card-title"><a href="${href}">${esc(b.name)}</a></h3>
       <div class="card-meta">
         <span class="chip th">TH18</span>
         ${b.subCategory && b.subCategory !== 'general' ? `<span class="chip">${esc(titleCase(b.subCategory))}</span>` : ''}
         <span class="chip date">Added ${fmtDate(b.dateAdded)}</span>
       </div>
       <div class="card-actions">
-        <a class="btn btn-sm" href="/${b.slug}/">View Base</a>
+        <a class="btn btn-sm" href="${href}">View Base</a>
         ${b.clashLink
           ? `<button class="btn btn-sm btn-primary" data-copy="${esc(b.clashLink)}">Copy Layout</button>`
           : `<button class="btn btn-sm" disabled title="No valid Clash link">No Link</button>`}
@@ -167,3 +175,6 @@ export function baseCard(b, cats){
 export function adSlot(name){
   return `<div class="ad-slot" data-slot="${esc(name)}" aria-hidden="true">Ad slot · ${esc(name)}</div>`;
 }
+
+// helper exported so build.mjs can prefix URLs too
+export const url = p => BASE + p;
