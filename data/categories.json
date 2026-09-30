@@ -1,0 +1,18 @@
+[
+  {"slug":"war-bases","key":"war","name":"TH18 War Bases","short":"War","icon":"⚔️","description":"TH18 war layouts for Clan Wars",
+   "intro":"Browse TH18 war layouts built for defensive use in Clan Wars. War bases prioritise protecting the Town Hall and keeping key defences separated so an attacker cannot clear the whole base with a single push."},
+  {"slug":"cwl-bases","key":"cwl","name":"TH18 CWL Bases","short":"CWL","icon":"🏆","description":"TH18 layouts for Clan War Leagues",
+   "intro":"Clan War Leagues rewards consistency, so a CWL base needs to be reliable rather than clever. These TH18 CWL layouts focus on repeatable defence across seven war days."},
+  {"slug":"farming-bases","key":"farming","name":"TH18 Farming Bases","short":"Farming","icon":"🌾","description":"Protect resources while you upgrade",
+   "intro":"Farming bases trade war performance for resource protection. These TH18 farming layouts concentrate Dark Elixir and key storages behind the strongest wall layers."},
+  {"slug":"trophy-bases","key":"trophy","name":"TH18 Trophy Bases","short":"Trophy","icon":"📈","description":"Layouts for pushing trophies",
+   "intro":"Trophy pushing is about denying stars, not resources. These TH18 trophy layouts make the Town Hall expensive to reach and force attackers into predictable pathing."},
+  {"slug":"hybrid-bases","key":"hybrid","name":"TH18 Hybrid Bases","short":"Hybrid","icon":"⚖️","description":"Balanced war and farming layouts",
+   "intro":"Hybrid bases are a compromise: enough defensive structure to survive a war attack, while still keeping the most valuable storages inside the core."},
+  {"slug":"anti-3-star-bases","key":"anti-3-star","name":"TH18 Anti-3-Star Bases","short":"Anti-3-Star","icon":"🛡️","description":"Layouts designed to deny three stars",
+   "intro":"An anti-3-star base accepts that it may give up two stars, but tries to make the third star very expensive. These TH18 layouts use offset Town Halls and layered wall rings."},
+  {"slug":"legend-league-bases","key":"legend-league","name":"TH18 Legend League Bases","short":"Legend League","icon":"👑","description":"Layouts for Legend League defence",
+   "intro":"Legend League defence is a numbers game — every day you defend eight times, and every star conceded costs trophies. These TH18 layouts are designed for consistency."},
+  {"slug":"anti-air-bases","key":"anti-air","name":"TH18 Anti-Air Bases","short":"Anti-Air","icon":"🎯","description":"Defence against air attacks",
+   "intro":"Air attacks remain a common way to break a TH18 base. These anti-air layouts concentrate Air Defences and air traps in overlapping coverage."}
+]

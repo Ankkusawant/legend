@@ -1,0 +1,25 @@
+[
+  {
+    "id": "th18-war-001",
+    "slug": "th18-war-base-001",
+    "name": "TH18 Anti-3-Star War Base",
+    "category": "war",
+    "subCategory": "anti-3-star",
+    "image": "",
+    "clashLink": "",
+    "description": "A compartment-heavy war layout built around a central Town Hall with layered wall rings. The outer ring slows ground troops while the inner core keeps high-value defences separated from each other.",
+    "strategyNotes": [
+      "Town Hall sits inside a double wall ring to deny an easy two-star path through the centre.",
+      "Resource storages are placed outside the core to pull attackers away from defences.",
+      "Splash defences are spread so a single freeze spell cannot cover both air and ground threats.",
+      "Wide outer channels reduce the value of Wall Breakers on the first wall layer."
+    ],
+    "tags": ["TH18","War","Anti-3-Star","Compartment"],
+    "featured": true,
+    "published": true,
+    "dateAdded": "2026-08-14",
+    "updatedAt": "2026-09-02",
+    "views": 0,
+    "seo": { "title": "", "description": "", "canonical": "", "ogImage": "" }
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name": "clash-legend-bases",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "TH18 base library for Clash of Clans — static site generator + admin.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "sync": "node scripts/sync-from-supabase.mjs",
+    "deploy": "npm run validate && npm run build"
+  },
+  "engines": { "node": ">=20" }
+}
