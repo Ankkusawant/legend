@@ -543,6 +543,16 @@ async function main(){
   // copy public assets
   await copyDir(PUBLIC, DIST);
 
+  // copy admin assets (kept separate from public/ in the source tree,
+  // merged into dist/admin/ at build time)
+  const ADMIN = path.join(ROOT, 'admin');
+  try {
+    await copyDir(ADMIN, path.join(DIST, 'admin'));
+    console.log('Copied admin/ → dist/admin/');
+  } catch (e) {
+    console.warn('No admin/ folder to copy:', e.message);
+  }
+
   // generate SVG placeholders
   const artDir = path.join(DIST, 'images', 'bases');
   await fs.mkdir(artDir, { recursive: true });
