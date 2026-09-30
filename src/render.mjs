@@ -2,6 +2,7 @@
 let BASE = '';
 export function setBase(b){ BASE = b || ''; }
 const u = p => BASE + p;
+export const url = p => BASE + p;
 // ----------------------------------------------------------------------
 
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
@@ -175,6 +176,3 @@ export function baseCard(b, cats){
 export function adSlot(name){
   return `<div class="ad-slot" data-slot="${esc(name)}" aria-hidden="true">Ad slot · ${esc(name)}</div>`;
 }
-
-// helper exported so build.mjs can prefix URLs too
-export const url = p => BASE + p;
