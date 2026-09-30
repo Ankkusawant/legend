@@ -1,7 +1,7 @@
 name: Build & Deploy
 on:
   push:
-    branches: [main]
+    branches: [branch]
   repository_dispatch:
     types: [content-update]
   schedule:
