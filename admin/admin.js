@@ -189,7 +189,9 @@ function renderEditor(b){
   name.addEventListener('input', () => { if (!slug.dataset.touched){ slug.value = slugify(name.value); preview.textContent = slug.value; } });
   slug.addEventListener('input', () => { slug.dataset.touched = '1'; preview.textContent = slug.value; });
   document.querySelector('[data-back]').onclick = () => setView('bases');
-  document.querySelector('[data-preview]')?.addEventListener('click', () => window.open(`https://clashlegendbases.online/${b.slug}/`, '_blank', 'noopener'));
+document.querySelector('[data-preview]')?.addEventListener('click', () => {
+  window.open(`../${b.slug}/`, '_blank', 'noopener');
+});
   document.querySelector('[data-save]').onclick = async () => {
     const data = {
       name: document.getElementById('f-name').value.trim(),
