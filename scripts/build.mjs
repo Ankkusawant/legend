@@ -16,8 +16,6 @@ const PUBLIC = path.join(ROOT, 'public');
 const readJSON = async p => JSON.parse(await fs.readFile(p, 'utf8'));
 
 async function writePage(urlPath, html){
-  // urlPath already includes basePath? No — writePage writes to disk under dist/<cleanPath>,
-  // so we must strip basePath if present, because dist/ maps to the basePath root.
   const clean = urlPath.replace(/^\/|\/$/g, '');
   const dir = clean ? path.join(DIST, clean) : DIST;
   await fs.mkdir(dir, { recursive: true });
@@ -437,7 +435,6 @@ async function main(){
   const allBases = await readJSON(path.join(DATA, 'bases.json'));
   const bases = allBases.filter(b => b.published !== false);
 
-  // Activate base path prefix on all rendered URLs
   setBase(settings.basePath || '');
   console.log(`Base path: "${settings.basePath || ''}"  Domain: ${settings.domain}`);
   console.log(`Build: ${bases.length} published / ${allBases.length} total bases`);
@@ -528,7 +525,7 @@ async function main(){
     console.log('Skipping CNAME (github.io host)');
   }
 
-  // search index — served from the base root, so no prefix needed in the file itself
+  // search index
   const searchIndex = bases.map(b => ({
     slug: b.slug, name: b.name, category: b.category,
     categoryName: cats.find(c => c.key === b.category)?.name || b.category,
@@ -536,17 +533,17 @@ async function main(){
   }));
   await fs.writeFile(path.join(DIST, 'search-index.json'), JSON.stringify(searchIndex), 'utf8');
 
-  // supabase public config (anon key only — safe to expose)
+  // supabase public config
   const supaCfg = {
     url: process.env.SUPABASE_URL || '',
     anonKey: process.env.SUPABASE_ANON_KEY || ''
   };
   await fs.writeFile(path.join(DIST, 'supabase-config.json'), JSON.stringify(supaCfg), 'utf8');
 
-  // copy public assets (styles.css, app.js, favicon.svg, etc.)
+  // copy public assets
   await copyDir(PUBLIC, DIST);
 
-  // generate SVG placeholders for bases that have no image
+  // generate SVG placeholders
   const artDir = path.join(DIST, 'images', 'bases');
   await fs.mkdir(artDir, { recursive: true });
   for (const b of bases){
